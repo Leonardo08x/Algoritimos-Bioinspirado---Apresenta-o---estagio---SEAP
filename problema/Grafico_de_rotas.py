@@ -8,7 +8,7 @@ def rotas_converter(rotas,coords):
             if i == j[2]:
                 coord_rota.append((i, j[0], j[1]))
     return coord_rota
-def grafico_de_rotas(rotas_geral, rotas_ga, rotas_aco, rotas_gwo):
+def grafico_de_rotas(rotas_geral, rotas_ga, rotas_aco, rotas_gwo,dist_ga, dist_aco, dist_gwo):
     #pontos
     city_points = go.Scatter(x=[c[0] for c in rotas_geral], y=[c[1] for c in rotas_geral], mode='markers+text', name='Cidades',
     text=[f"Cidade {i}" for i in range(len(rotas_geral))],
@@ -17,13 +17,13 @@ def grafico_de_rotas(rotas_geral, rotas_ga, rotas_aco, rotas_gwo):
     #rotas
     rota_aco = go.Scatter(x=[c[1] for c in rotas_aco], y=[c[2] for c in rotas_aco], mode='lines',
     line=dict(color='red', width=2),
-    name=f'Tour-aco:{[c[0] for c in rotas_aco]}')
+    name=f'Tour-aco: inicio:cidade-{rotas_aco[0][0]} - fim:cidade-{rotas_aco[-1][0]} - Distância: {dist_aco}')
     rota_ga = go.Scatter(x=[c[1] for c in rotas_ga], y=[c[2] for c in rotas_ga], mode='lines',
     line=dict(color='green', width=2),
-    name=f'Tour-ga:{[c[0] for c in rotas_ga]}')
+    name=f'Tour-ga: inicio:cidade-{rotas_ga[0][0]} - fim:cidade-{rotas_ga[-1][0]} - Distância: {dist_ga}')
     rota_gwo = go.Scatter(x=[c[1] for c in rotas_gwo], y=[c[2] for c in rotas_gwo], mode='lines',
     line=dict(color='blue', width=2),
-    name=f'Tour-gwo:{[c[0] for c in rotas_gwo]}')
+    name=f'Tour-gwo: inicio:cidade-{rotas_gwo[0][0]} - fim:cidade-{rotas_gwo[-1][0]} - Distância: {dist_gwo}')
 
     # Criar figura e adicionar traces
     fig = go.Figure()

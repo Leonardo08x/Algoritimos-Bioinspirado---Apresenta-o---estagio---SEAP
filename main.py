@@ -31,4 +31,4 @@ if __name__ == "__main__":
     print("distância:", round(gwo_len, 3))
     print("rota:", gwo_tour)
 
-    grafico_de_rotas(coords, rotas_converter(ga_tour,coords), rotas_converter(aco_tour,coords), rotas_converter(gwo_tour,coords))
+    grafico_de_rotas(coords, rotas_converter(ga_tour,coords), rotas_converter(aco_tour,coords), rotas_converter(gwo_tour,coords),round(ga_len, 3), round(aco_len, 3), round(gwo_len, 3))

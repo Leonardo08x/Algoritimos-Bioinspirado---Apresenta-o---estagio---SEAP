@@ -2,8 +2,9 @@ from algoritimos.Ant_Colony_Optimization import solve_aco
 from algoritimos.Algoritmo_Genético import solve_ga
 from algoritimos.Grey_Wolf_Optimizer import solve_gwo
 from problema.utils import TSPProblem
+from problema.Grafico_de_rotas import grafico_de_rotas, rotas_converter
 # ==================================================
-# Exemplo de uso
+# Exemplo de uso - problema do caixeiro viajante
 # ==================================================
 
 if __name__ == "__main__":
@@ -29,3 +30,5 @@ if __name__ == "__main__":
     gwo_tour, gwo_len = solve_gwo(tsp, n_wolves=50, iterations=800, seed=1)
     print("distância:", round(gwo_len, 3))
     print("rota:", gwo_tour)
+
+    grafico_de_rotas(coords, rotas_converter(ga_tour,coords), rotas_converter(aco_tour,coords), rotas_converter(gwo_tour,coords))

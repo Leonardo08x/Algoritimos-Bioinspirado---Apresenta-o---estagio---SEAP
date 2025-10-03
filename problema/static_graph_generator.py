@@ -6,12 +6,13 @@ def static_graph(len_distancia,lista_cidades, gen, coords):
     print(f"Geração: {gen} - Distância: {len_distancia}, Cidades: {lista_cidades}")
     rotas = rotas_converter(lista_cidades,coords)
     cidadesx, cidadesy = [c[0] for c in coords], [c[1] for c in coords]
+    plt.figure(figsize=(12, 6)) 
     plt.clf()
     plt.scatter(cidadesx, cidadesy, color='blue')
     for i, (x, y) in enumerate(coords):
-        plt.text(x, y, f'C{i}', fontsize=9, ha='right')
+        plt.text(x, y, f'Cidade - {i} ', fontsize=9, ha='right')
     rotax, rotay = [rotas[i][1] for i in range(len(rotas))], [rotas[i][2] for i in range(len(rotas))]
-    plt.plot(rotax, rotay, color='red', linestyle='-', linewidth=1, marker='o', markersize=5)
+    plt.plot(rotax, rotay, color='red', linestyle='-', linewidth=0.5, marker='o', markersize=5)
     plt.title(f'AG - Geração: {gen} - Distância: {len_distancia}')
     plt.xlabel('Coordenada X')
     plt.ylabel('Coordenada Y')
@@ -34,6 +35,6 @@ def gif_maker():
         file_path = os.path.join(folder, filename)
         images.append(imageio.imread(file_path))
     gif_path = os.path.join(folder, 'evolucao_ag.gif')
-    imageio.mimsave(gif_path, images, fps=0.8)
+    imageio.mimsave(gif_path, images, fps=0.4)
     print(f"GIF salvo em: {gif_path}")
     del_pngs()

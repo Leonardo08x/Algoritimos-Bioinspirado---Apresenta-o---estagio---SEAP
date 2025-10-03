@@ -16,18 +16,20 @@ if __name__ == "__main__":
     ]
     tsp = TSPProblem(coords)
 
-    print("=== GA ===")
-    ga_tour, ga_len = solve_ga(tsp, pop_size=200, generations=800, seed=1)
+    
+    ga_tour, ga_len = solve_ga(coords, tsp, pop_size=200, generations=800, seed=1)
+    print("\n=== GA ===")
     print("distância:", round(ga_len, 3))
     print("rota:", ga_tour)
 
-    print("\n=== ACO ===")
+    
     aco_tour, aco_len = solve_aco(tsp, n_ants=40, iterations=400, seed=1)
+    print("\n=== ACO ===")
     print("distância:", round(aco_len, 3))
     print("rota:", aco_tour)
 
-    print("\n=== GWO (Random Keys) ===")
     gwo_tour, gwo_len = solve_gwo(tsp, n_wolves=50, iterations=800, seed=1)
+    print("\n=== GWO (Random Keys) ===")
     print("distância:", round(gwo_len, 3))
     print("rota:", gwo_tour)
 

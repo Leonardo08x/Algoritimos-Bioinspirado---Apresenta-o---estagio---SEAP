@@ -4,7 +4,7 @@
 import random
 from typing import List, Tuple
 from problema.utils import *
-
+from problema.static_graph_generator import static_graph, gif_maker
 def ox_crossover(p1: List[int], p2: List[int]) -> List[int]:
     n = len(p1)
     a, b = sorted(random.sample(range(n), 2))
@@ -35,7 +35,7 @@ def tournament(pop, fitnesses, k=3):
             best_fit = fitnesses[i]
     return best[:]
 
-def solve_ga(problem: TSPProblem, pop_size=150, generations=800,
+def solve_ga(coords, problem: TSPProblem , pop_size=150, generations=800,
              cx_rate=0.9, mut_rate=0.02, elitism=2, seed=42,
              use_two_opt=True):
     random.seed(seed)
@@ -48,7 +48,6 @@ def solve_ga(problem: TSPProblem, pop_size=150, generations=800,
         p = base[:]
         random.shuffle(p)
         population.append(p)
-
     def evaluate(pop):
         return [problem.length(ind) for ind in pop]
 
@@ -71,13 +70,15 @@ def solve_ga(problem: TSPProblem, pop_size=150, generations=800,
 
         population = new_pop
         fitnesses = evaluate(population)
+
         # atualiza melhor
         idx = min(range(pop_size), key=lambda i: fitnesses[i])
         if fitnesses[idx] < best_len:
             best, best_len = population[idx][:], fitnesses[idx]
+            static_graph(best_len, best, g, coords)
 
     if use_two_opt:
         best = two_opt(best, problem)
         best_len = problem.length(best)
-
+        gif_maker()
     return best, best_len
